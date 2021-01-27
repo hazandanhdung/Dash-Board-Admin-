@@ -26,14 +26,7 @@
           </b-form-group>
           <b-form-group>
             <label class="font-weight-bold" for="">User</label>
-<!--            <b-form-input placeholder="User"></b-form-input>-->
-
             <b-card no-body>
-              <!-- Card header -->
-<!--              <b-card-header class="card-header">-->
-<!--                <h3 class="mb-0">User</h3>-->
-<!--              </b-card-header>-->
-              <!-- Card body -->
               <b-card-body class="card-body">
                 <b-form>
                   <b-form-file
@@ -44,7 +37,6 @@
                 </b-form>
               </b-card-body>
             </b-card>
-
           </b-form-group>
           <b-form-group label="Completion" class="font-weight-bold">
             <b-form-radio v-model="selected" name="some-radios" value="A">

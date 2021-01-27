@@ -23,12 +23,11 @@
                         :data="items">
                 <el-table-column label="ID"
                                  min-width="190px"
-                                 prop="name"
+                                 prop="id"
                                  sortable>
                   <template v-slot="{row}">
-
                     <b-media no-body class="align-items-center">
-                      <b-media-body>
+                      <b-media-body class="pl-3">
                         <span class="font-weight-600 name mb-0 text-sm">  {{ row.id }}</span>
                       </b-media-body>
                     </b-media>
@@ -39,7 +38,6 @@
                                  prop="name"
                                  sortable>
                   <template v-slot="{row}">
-
                     <b-media no-body class="align-items-center">
                       <b-media-body>
                         <span class="font-weight-600 name mb-0 text-sm">  {{ row.name }}</span>
@@ -60,7 +58,6 @@
                     </b-media>
                   </template>
                 </el-table-column>
-
                 <el-table-column label="Status"
                                  min-width="170px"
                                  prop="status"
@@ -76,8 +73,6 @@
                     </div>
                   </template>
                 </el-table-column>
-
-
                 <el-table-column label="Users"
                                  min-width="190px"
                                  prop="users"
@@ -94,8 +89,6 @@
                     </b-media>
                   </template>
                 </el-table-column>
-
-
                 <el-table-column label="Completion"
                                  prop="completion"
                                  min-width="240px"
@@ -140,6 +133,7 @@
               <b-card-footer class="py-4 d-flex justify-content-end">
                 <base-pagination v-model="currentPage" :per-page="15" :total="50"></base-pagination>
               </b-card-footer>
+
             </b-card>
           </card>
         </b-col>
