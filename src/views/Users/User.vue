@@ -19,6 +19,7 @@
 
               <el-table class="table-responsive table-flush"
                         header-row-class-name="thead-light"
+
                         :data="items">
                 <el-table-column label="ID"
                                  min-width="190px"
@@ -105,16 +106,14 @@
                         <b-badge variant="default">Done</b-badge>
                       </div>
                       <div class="completion mr-2" v-if="row.completion == false">
-                        <b-badge variant="primary">
-                          Unfinished
-                        </b-badge>
+                        <b-badge variant="primary">Unfinished</b-badge>
                       </div>
                       <div>
                       </div>
                     </div>
                   </template>
                 </el-table-column>
-                <el-table-column label="Update User" min-width="180px">
+                <el-table-column label="Action" min-width="180px">
                   <template v-slot="{row}">
                     <el-dropdown trigger="click" class="dropdown">
                     <span class="btn btn-sm btn-icon-only text-light">
@@ -122,10 +121,12 @@
                     </span>
                       <el-dropdown-menu class="dropdown-menu dropdown-menu-arrow show" slot="dropdown">
                         <b-dropdown-item>
-                          <base-button type="info">Add New User</base-button>
+                          <router-link :to="{ name: 'user-add-new' }" class="color__a">
+                            <base-button type="info">Add New User</base-button>
+                          </router-link>
                         </b-dropdown-item>
                         <b-dropdown-item>
-                          <base-button type="primary">Update User</base-button>
+                          <base-button type="primary">Update UsUer</base-button>
                         </b-dropdown-item>
                         <b-dropdown-item>
                           <base-button type="danger">Delete User</base-button>
@@ -149,7 +150,9 @@
 
 <script>
 import BaseHeader from '@/components/BaseHeader';
+import LoadingScreenCenter from "@/components/LoadingScreenCenter/LoadingScreenCenter";
 import {Table, TableColumn, DropdownMenu, DropdownItem, Dropdown} from 'element-ui';
+import {mapState, mapActions} from "vuex";
 import {getListTodoUsers} from "@/api/listUser";
 
 export default {
@@ -161,23 +164,32 @@ export default {
     [Dropdown.name]: Dropdown,
     [DropdownItem.name]: DropdownItem,
     [DropdownMenu.name]: DropdownMenu,
+    LoadingScreenCenter
   },
   data() {
     return {
       items: [],
+      loading: false,
       currentPage: 1,
       ApiList: getListTodoUsers,
     }
   },
+  computed: {},
   methods: {
     getListDataTableUser() {
+      this.$store.commit("Common/setLoading", true);
       this.ApiList()
         .then(res => {
           this.items = res;
+          this.$store.commit("Common/setLoading", false);
         })
         .catch((e) => {
           console.log(e)
+          this.$store.commit("Common/setLoading", false);
         })
+    },
+    makeRouterParams(){
+
     }
 
   },
