@@ -19,7 +19,6 @@ service.interceptors.request.use(
     //   config.headers["Authorization"] =
     //     "Bearer " + localStorage.getItem("TOKEN_ADMIN");
     // }
-    console.log(config);
     return config;
   },
   error => {
