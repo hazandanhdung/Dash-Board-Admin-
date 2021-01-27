@@ -13,6 +13,15 @@
         </sidebar-item>
 
         <sidebar-item
+          :link="{
+              name: 'User',
+              path: '/user',
+              icon: 'ni ni-satisfied text-red'
+              }"
+        >
+        </sidebar-item>
+
+        <sidebar-item
             :link="{
               name: 'Icons',
               path: '/icons',
