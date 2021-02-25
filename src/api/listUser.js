@@ -1,4 +1,5 @@
 import request from "../services/request";
+import upload from "@/services/upload";
 import constantApi from "../constants/constantApi";
 
 
@@ -9,7 +10,16 @@ const getListTodoUsers = params => {
     params: params
   });
 };
+const addTodoUsers = params => {
+  return upload({
+    url: constantApi.BASE_API,
+    method: "POST",
+    data: params
+  });
+};
+
 
 export {
-  getListTodoUsers
+  getListTodoUsers,
+  addTodoUsers
 }

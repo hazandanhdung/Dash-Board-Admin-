@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import User from "./listUser";
 import Common from "./common";
+import UserAccount from "./user"
 
 
 Vue.use(Vuex);
@@ -9,7 +10,8 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   modules: {
     User,
-    Common
+    Common,
+    UserAccount
   }
 });
 

@@ -97,7 +97,7 @@
     },
     methods: {
       onSubmit() {
-        // this will be called only after form is valid. You can do api call here to login
+        this.$router.push('dashboard');
       }
     }
   };

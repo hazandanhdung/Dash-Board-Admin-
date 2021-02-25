@@ -8,16 +8,16 @@
     <b-card>
       <form action="">
         <b-card-body>
-        <b-form-group>
-            <label class="font-weight-bold">Name</label>
-            <b-form-input placeholder="Username"></b-form-input>
-        </b-form-group>
           <b-form-group>
-            <label class="font-weight-bold" for="">Budget</label>
-            <b-form-input placeholder="Budget"></b-form-input>
+            <label class="font-weight-bold">Name</label>
+            <b-form-input v-model="userAccount.name" placeholder="Username"></b-form-input>
           </b-form-group>
-          <b-form-group label="Status" class="font-weight-bold">
-            <b-form-radio v-model="selected" name="some-radios" value="A">
+          <b-form-group>
+            <label class="font-weight-bold">Budget</label>
+            <b-form-input v-model="userAccount.budget" placeholder="Budget"></b-form-input>
+          </b-form-group>
+          <b-form-group label="Status" class="font-weight-bold" v-model="userAccount.status">
+            <b-form-radio name="some-radios" value="A">
               <b-badge variant="success">Active</b-badge>
             </b-form-radio>
             <b-form-radio v-model="selected" name="some-radios" value="B">
@@ -25,7 +25,7 @@
             </b-form-radio>
           </b-form-group>
           <b-form-group>
-            <label class="font-weight-bold" for="">User</label>
+            <label class="font-weight-bold">User</label>
             <b-card no-body>
               <b-card-body class="card-body">
                 <b-form>
@@ -39,31 +39,42 @@
             </b-card>
           </b-form-group>
           <b-form-group label="Completion" class="font-weight-bold">
-            <b-form-radio v-model="selected" name="some-radios" value="A">
+            <b-form-radio name="some-radios" value="A">
               <b-badge variant="default">Done</b-badge>
             </b-form-radio>
             <b-form-radio v-model="selected" name="some-radios" value="B">
               <b-badge variant="primary">Unfinished</b-badge>
             </b-form-radio>
           </b-form-group>
-      </b-card-body>
+        </b-card-body>
       </form>
     </b-card>
   </div>
 </template>
 
 <script>
+import {addTodoUsers} from "@/api/listUser";
+import {ValidationProvider, ValidationObserver} from "vee-validate";
 
 export default {
-name: "UserAddNew",
-  data(){
-    return{
-
+  name: "UserAddNew",
+  components: {
+    ValidationProvider,
+    ValidationObserver
+  },
+  data() {
+    return {
+      addTodoUsers: addTodoUsers,
+      userAccount: {
+        name: "",
+        budget: "",
+        status: [],
+        userAvatar: "",
+        completion: ""
+      }
     }
   },
-  methods:{
-
-  },
+  methods: {},
   created() {
   }
 }
