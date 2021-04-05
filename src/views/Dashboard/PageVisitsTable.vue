@@ -42,7 +42,7 @@
   </b-card>
 </template>
 <script>
-  import { Table, TableColumn, DropdownMenu, DropdownItem, Dropdown} from 'element-ui'
+import { Table, TableColumn, DropdownMenu, DropdownItem, Dropdown} from 'element-ui'
   export default {
     name: 'page-visits-table',
     components: {

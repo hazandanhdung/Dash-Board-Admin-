@@ -12,7 +12,23 @@
           <card header-classes="bg-transparent">
             <h3 slot="header" class="mb-0">Department Information</h3>
             <b-card no-body>
-              <b-card-header class="border-0 d-flex justify-content-end">
+              <b-card-header class="border-0 d-flex justify-content-between">
+                <div class="size-form">
+                  <b-form-group class="mb-0">
+                    <b-input-group
+                      class="input-group-alternative input-group-merge"
+                    >
+                      <b-form-input placeholder="Search" type="text">
+                      </b-form-input>
+
+                      <div class="input-group-append">
+                        <span class="input-group-text"
+                          ><i class="fas fa-search"></i
+                        ></span>
+                      </div>
+                    </b-input-group>
+                  </b-form-group>
+                </div>
                 <router-link :to="{ name: 'user-add-new' }" class="color__a">
                   <b-button variant="primary">Add User</b-button>
                 </router-link>
@@ -123,24 +139,16 @@
                     </div>
                   </template>
                 </el-table-column>
-                <el-table-column label="Action" min-width="180px">
+                <el-table-column label="Options" min-width="180px">
                   <template v-slot="{ row }">
-                    <el-dropdown trigger="click" class="dropdown">
-                      <span class="btn btn-sm btn-icon-only text-light">
-                        <i class="fas fa-ellipsis-v mt-2"></i>
-                      </span>
-                      <el-dropdown-menu
-                        class="dropdown-menu dropdown-menu-arrow show"
-                        slot="dropdown"
-                      >
-                        <b-dropdown-item>
-                          <base-button type="primary">Update UsUer</base-button>
-                        </b-dropdown-item>
-                        <b-dropdown-item>
-                          <base-button type="danger">Delete User</base-button>
-                        </b-dropdown-item>
-                      </el-dropdown-menu>
-                    </el-dropdown>
+                    <div>
+                      <div>
+                        <b-button v-b-modal.modal-1>Edit</b-button>
+                        <b-modal id="modal-1" title="BootstrapVue">
+                          <p class="my-4">Hello from modal!</p>
+                        </b-modal>
+                      </div>
+                    </div>
                   </template>
                 </el-table-column>
               </el-table>
@@ -198,4 +206,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.size-form {
+  min-width: 300px;
+}
+</style>
