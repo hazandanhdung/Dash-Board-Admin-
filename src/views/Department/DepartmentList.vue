@@ -10,16 +10,17 @@
       <b-row class="justify-content-center">
         <b-col lg="12">
           <card header-classes="bg-transparent">
-            <h3 slot="header" class="mb-0">User System</h3>
+            <h3 slot="header" class="mb-0">Department Information</h3>
             <b-card no-body>
-              <b-card-header class="border-0">
-                <h3 class="mb-0">Light table</h3>
+              <b-card-header class="border-0 d-flex justify-content-end">
+                <router-link :to="{ name: 'user-add-new' }" class="color__a">
+                  <b-button variant="primary">Add User</b-button>
+                </router-link>
               </b-card-header>
-
               <el-table
                 class="table-responsive table-flush"
                 header-row-class-name="thead-light"
-                :data="items"
+                :data="users"
               >
                 <el-table-column
                   label="ID"
@@ -29,9 +30,9 @@
                 >
                   <template v-slot="{ row }">
                     <b-media no-body class="align-items-center">
-                      <b-media-body class="pl-3">
+                      <b-media-body>
                         <span class="font-weight-600 name mb-0 text-sm">
-                          {{ row.id }}</span
+                          {{ row._id }}</span
                         >
                       </b-media-body>
                     </b-media>
@@ -54,42 +55,39 @@
                   </template>
                 </el-table-column>
                 <el-table-column
-                  label="Budget"
+                  label="Gender"
                   min-width="190px"
-                  prop="budget"
+                  prop="gender"
                   sortable
                 >
                   <template v-slot="{ row }">
                     <b-media no-body class="align-items-center">
                       <b-media-body>
                         <span class="font-weight-600 name mb-0 text-sm">
-                          {{ row.price }} $</span
-                        >
+                          {{ row.gender }}
+                        </span>
                       </b-media-body>
                     </b-media>
                   </template>
                 </el-table-column>
                 <el-table-column
-                  label="Status"
+                  label="Phone"
                   min-width="170px"
-                  prop="status"
+                  prop="phone"
                   sortable
                 >
                   <template v-slot="{ row }">
                     <div class="badge-dot mr-4" type="">
-                      <div class="status" v-if="row.status == true">
-                        <b-badge variant="success">Active</b-badge>
-                      </div>
-                      <div class="status" v-if="row.status == false">
-                        <b-badge variant="warning">Not Active</b-badge>
-                      </div>
+                      <span class="font-weight-600 name mb-0 text-sm">
+                        {{ row.phone }}
+                      </span>
                     </div>
                   </template>
                 </el-table-column>
                 <el-table-column
-                  label="Users"
+                  label="Avatar"
                   min-width="190px"
-                  prop="users"
+                  prop="avatar"
                   sortable
                 >
                   <template v-slot="{ row }">
@@ -101,10 +99,7 @@
                           data-toggle="tooltip"
                           data-original-title="Ryan Tompson"
                         >
-                          <img
-                            alt="Image placeholder"
-                            src="img/theme/team-1.jpg"
-                          />
+                          <img alt="Image placeholder" :src="row.picture" />
                         </a>
                       </b-media-body>
                     </b-media>
@@ -118,17 +113,11 @@
                 >
                   <template v-slot="{ row }">
                     <div class="d-flex align-items-center">
-                      <div
-                        class="completion mr-2"
-                        v-if="row.completion == true"
-                      >
-                        <b-badge variant="default">Done</b-badge>
+                      <div class="completion mr-2" v-if="row.isActive == true">
+                        <b-badge variant="primary">Active</b-badge>
                       </div>
-                      <div
-                        class="completion mr-2"
-                        v-if="row.completion == false"
-                      >
-                        <b-badge variant="primary">Unfinished</b-badge>
+                      <div class="completion mr-2" v-if="row.isActive == false">
+                        <b-badge variant="danger">UnActive</b-badge>
                       </div>
                       <div></div>
                     </div>
@@ -144,14 +133,6 @@
                         class="dropdown-menu dropdown-menu-arrow show"
                         slot="dropdown"
                       >
-                        <b-dropdown-item>
-                          <router-link
-                            :to="{ name: 'user-add-new' }"
-                            class="color__a"
-                          >
-                            <base-button type="info">Add New User</base-button>
-                          </router-link>
-                        </b-dropdown-item>
                         <b-dropdown-item>
                           <base-button type="primary">Update UsUer</base-button>
                         </b-dropdown-item>

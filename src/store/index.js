@@ -21,9 +21,8 @@ const store = new Vuex.Store({
   actions: {
     loadUsers({ commit }) {
       Vue.axios
-        .get("contacts")
+        .get("users")
         .then((result) => {
-          console.log(result.data, "xxx");
           commit("SAVE_USERS", result.data);
         })
         .catch((error) => {
@@ -34,6 +33,7 @@ const store = new Vuex.Store({
   mutations: {
     SAVE_USERS(state, users) {
       state.users = users;
+      console.log(state.users, "xxx");
     },
   },
 });
