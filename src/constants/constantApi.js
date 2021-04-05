@@ -1,4 +1,4 @@
-const BASE_API = "https://5c188fafcfe31000133b16eb.mockapi.io/Api/TodoList";
+const BASE_API = "http://localhost:3000";
 
 
 export default {
