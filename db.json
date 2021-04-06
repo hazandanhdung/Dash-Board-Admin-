@@ -2,6 +2,14 @@
   "users": [
     {
       "_id": "600",
+      "doctor": null,
+      "patient": null,
+      "nurse": null,
+      "pharmacist": null,
+      "laboratories": null,
+      "accountant": null,
+      "medicine": null,
+      "operationReport": null,
       "index": 0,
       "guid": "c5cc5613-4f71-4766-99d4-77b031045230",
       "isActive": false,
@@ -292,6 +300,19 @@
       "favoriteFruit": "strawberry"
     }
   ],
+  "dashboard": [
+    {
+      "doctor": 5,
+      "patient": 7,
+      "nurse": 2,
+      "pharmacist": 3,
+      "laboratories": 4,
+      "accountant": 9,
+      "medicine": 12,
+      "operationReport": 2
+    }
+  ],
+
   "info": {
     "seed": "fea8be3e64777240",
     "results": 1,
@@ -305,6 +326,7 @@
       "postId": 1
     }
   ],
+
   "profile": {
     "name": "typicode"
   }
