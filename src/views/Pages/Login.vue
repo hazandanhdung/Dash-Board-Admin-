@@ -120,7 +120,6 @@
   </div>
 </template>
 <script>
-import { ref } from "vue";
 import firebase from "firebase";
 export default {
   data() {

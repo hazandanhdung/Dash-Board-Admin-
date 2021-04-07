@@ -36,7 +36,7 @@
               <el-table
                 class="table-responsive table-flush"
                 header-row-class-name="thead-light"
-                :data="users"
+                :data="getResultUser"
               >
                 <el-table-column
                   label="ID"
@@ -178,7 +178,7 @@ import {
   DropdownItem,
   Dropdown,
 } from "element-ui";
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 
 export default {
   name: "user",
@@ -198,11 +198,13 @@ export default {
       currentPage: 1,
     };
   },
-  computed: mapState(["users"]),
-  methods: {},
-  created() {
-    this.$store.dispatch("loadUsers");
+  computed: {
+    ...mapGetters(["getResultUser"]),
   },
+  mounted() {
+    this.$store.dispatch("getUser");
+  },
+  methods: {},
 };
 </script>
 

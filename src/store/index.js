@@ -4,6 +4,7 @@ import axios from "axios";
 import VueAxios from "vue-axios";
 import Common from "./common";
 import UserAccount from "./user";
+import db from "@/firebase/configFirebase";
 
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
@@ -18,22 +19,25 @@ const store = new Vuex.Store({
   state: {
     users: [],
   },
+  getters: {
+    getResultUser(state) {
+      return state.users;
+    },
+  },
   actions: {
-    loadUsers({ commit }) {
-      Vue.axios
-        .get("users")
-        .then((result) => {
-          commit("SAVE_USERS", result.data);
-        })
-        .catch((error) => {
-          throw new Error(`API ${error}`);
+    getUser() {
+      let resultUser = [];
+      db.ref("users/").once("value", function (response) {
+        response.forEach((item) => {
+          resultUser.push(item.val());
         });
+        store.commit("SAVE_USERS", resultUser);
+      });
     },
   },
   mutations: {
     SAVE_USERS(state, users) {
       state.users = users;
-      console.log(state.users, "xxx");
     },
   },
 });
