@@ -1,25 +1,24 @@
 <template>
   <div class="center__loading">
-    <img :src="loadingGifCenter" class="center__screen"/>
+    <ClipLoader class="transform-sync"></ClipLoader>
   </div>
 </template>
 
 <script>
-import loadingGifCenter from "@/assets/loading/loading_new.gif";
+import { ClipLoader } from "@saeris/vue-spinners";
 
 export default {
   name: "LoadingCenterScreen",
+  components: {
+    ClipLoader,
+  },
   data() {
-    return {
-      loadingGifCenter: loadingGifCenter
-    };
-  }
+    return {};
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-
-
 /* Absolute Center CSS Spinner */
 .center__loading {
   position: fixed;
@@ -72,15 +71,20 @@ export default {
 
   border-radius: 0.5em;
   -webkit-box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0,
-  rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0,
-  rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.5) -1.5em 0 0 0,
-  rgba(0, 0, 0, 0.5) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0,
-  rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+    rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0,
+    rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.5) -1.5em 0 0 0,
+    rgba(0, 0, 0, 0.5) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0,
+    rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
   box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0,
-  rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0,
-  rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) -1.5em 0 0 0,
-  rgba(0, 0, 0, 0.75) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0,
-  rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+    rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0,
+    rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) -1.5em 0 0 0,
+    rgba(0, 0, 0, 0.75) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0,
+    rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+}
+.transform-sync {
+  transform: rotateZ(90deg);
+  width: 75px;
+  height: 75px;
 }
 
 @media only screen and (max-width: 991px) {
@@ -92,6 +96,4 @@ export default {
     z-index: -1;
   }
 }
-
-
 </style>

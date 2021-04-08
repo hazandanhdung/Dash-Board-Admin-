@@ -27,9 +27,11 @@ const store = new Vuex.Store({
   actions: {
     getUser() {
       let resultUser = [];
+      store.commit("Common/setLoading", true);
       db.ref("users/").once("value", function (response) {
         response.forEach((item) => {
           resultUser.push(item.val());
+          store.commit("Common/setLoading", false);
         });
         store.commit("SAVE_USERS", resultUser);
       });

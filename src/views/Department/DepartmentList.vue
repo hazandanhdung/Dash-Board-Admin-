@@ -170,7 +170,6 @@
 
 <script>
 import BaseHeader from "@/components/BaseHeader";
-import LoadingScreenCenter from "@/components/LoadingScreenCenter/LoadingScreenCenter";
 import {
   Table,
   TableColumn,
@@ -189,7 +188,6 @@ export default {
     [Dropdown.name]: Dropdown,
     [DropdownItem.name]: DropdownItem,
     [DropdownMenu.name]: DropdownMenu,
-    LoadingScreenCenter,
   },
   data() {
     return {
@@ -204,8 +202,10 @@ export default {
   mounted() {
     this.$store.dispatch("getUser");
   },
-  methods: {},
-};
+  methods: {
+
+  }
+}
 </script>
 
 <style lang="scss" scoped>

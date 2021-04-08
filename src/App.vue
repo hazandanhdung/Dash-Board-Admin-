@@ -1,6 +1,7 @@
 <template>
   <div>
     <router-view></router-view>
+    <LoadingCenterScreen v-if="loading"></LoadingCenterScreen>
   </div>
 </template>
 

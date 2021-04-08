@@ -19,11 +19,16 @@ import DashboardPlugin from "./plugins/dashboard-plugin";
 import App from "./App.vue";
 import store from "./store";
 import firebase from "@/firebase";
+import { VueSpinners } from '@saeris/vue-spinners'
+
+
 
 // router setup
 import router from "./routes/router";
 // plugin setup
 Vue.use(DashboardPlugin);
+Vue.use(VueSpinners)
+
 
 
 
