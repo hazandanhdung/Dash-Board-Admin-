@@ -18,9 +18,12 @@
                     <b-input-group
                       class="input-group-alternative input-group-merge"
                     >
-                      <b-form-input placeholder="Search" type="text">
+                      <b-form-input
+                        placeholder="Search"
+                        type="text"
+                        v-model="searchQuery"
+                      >
                       </b-form-input>
-
                       <div class="input-group-append">
                         <span class="input-group-text"
                           ><i class="fas fa-search"></i
@@ -29,18 +32,21 @@
                     </b-input-group>
                   </b-form-group>
                 </div>
-                <router-link :to="{ name: 'user-add-new' }" class="color__a">
+                <router-link
+                  :to="{ name: 'department-add-user' }"
+                  class="color__a"
+                >
                   <b-button variant="primary">Add User</b-button>
                 </router-link>
               </b-card-header>
               <el-table
                 class="table-responsive table-flush"
                 header-row-class-name="thead-light"
-                :data="getResultUser"
+                :data="resultQuery"
               >
                 <el-table-column
                   label="ID"
-                  min-width="190px"
+                  min-width="100px"
                   prop="id"
                   sortable
                 >
@@ -48,7 +54,7 @@
                     <b-media no-body class="align-items-center">
                       <b-media-body>
                         <span class="font-weight-600 name mb-0 text-sm">
-                          {{ row._id }}</span
+                          {{ row.index }}</span
                         >
                       </b-media-body>
                     </b-media>
@@ -81,6 +87,22 @@
                       <b-media-body>
                         <span class="font-weight-600 name mb-0 text-sm">
                           {{ row.gender }}
+                        </span>
+                      </b-media-body>
+                    </b-media>
+                  </template>
+                </el-table-column>
+                <el-table-column
+                  label="Email"
+                  min-width="210px"
+                  prop="gender"
+                  sortable
+                >
+                  <template v-slot="{ row }">
+                    <b-media no-body class="align-items-center">
+                      <b-media-body>
+                        <span class="font-weight-600 name mb-0 text-sm">
+                          {{ row.email }}
                         </span>
                       </b-media-body>
                     </b-media>
@@ -141,18 +163,22 @@
                 </el-table-column>
                 <el-table-column label="Options" min-width="180px">
                   <template v-slot="{ row }">
+                    <div class="mb-3">
+                      <b-button
+                        v-b-modal.modal-1
+                        class="btn-info"
+                        @click="handleEditUser"
+                        >Edit <i class="ni ni-settings-gear-65"></i>
+                      </b-button>
+                    </div>
                     <div>
-                      <div>
-                        <b-button v-b-modal.modal-1>Edit</b-button>
-                        <b-modal id="modal-1" title="BootstrapVue">
-                          <p class="my-4">Hello from modal!</p>
-                        </b-modal>
-                      </div>
+                      <b-button v-b-modal.modal-1 class="btn-danger"
+                        >Delete <i class="ni ni-fat-remove"></i>
+                      </b-button>
                     </div>
                   </template>
                 </el-table-column>
               </el-table>
-
               <b-card-footer class="py-4 d-flex justify-content-end">
                 <base-pagination
                   v-model="currentPage"
@@ -162,6 +188,29 @@
               </b-card-footer>
             </b-card>
           </card>
+          <b-modal id="modal-1" title="Edit Department">
+            <b-card-body>
+              <form>
+                <base-input label="Name" placeholder="Name" />
+                <base-input
+                  label="Email address"
+                  placeholder="name@example.com"
+                />
+                <base-input label="Phone" placeholder="Phone" />
+                <b-form>
+                  <label class="custom-text-avatar">Avatar</label>
+                  <b-form-file
+                    label="Avatar"
+                    placeholder="Select file"
+                    drop-placeholder="Drop file here..."
+                  ></b-form-file>
+                </b-form>
+              </form>
+            </b-card-body>
+          </b-modal>
+          <b-modal id="modal-2" title="BootstrapVue">
+            <p class="my-4">Hello from modal!</p>
+          </b-modal>
         </b-col>
       </b-row>
     </b-container>
@@ -177,7 +226,7 @@ import {
   DropdownItem,
   Dropdown,
 } from "element-ui";
-import { mapState, mapActions, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "user",
@@ -194,22 +243,49 @@ export default {
       items: [],
       loading: false,
       currentPage: 1,
+      searchQuery: null,
     };
   },
   computed: {
     ...mapGetters(["getResultUser"]),
+    resultQuery() {
+      if (this.searchQuery) {
+        return this.getResultUser.filter((item) => {
+          return this.searchQuery
+            .toLowerCase()
+            .split(" ")
+            .every(
+              (v) =>
+                item.name.toLowerCase().includes(v) ||
+                item.phone.toLowerCase().includes(v) ||
+                item._id.toLowerCase().includes(v)
+            );
+        });
+      } else {
+        return this.getResultUser;
+      }
+    },
   },
   mounted() {
     this.$store.dispatch("getUser");
+    // this.$store.dispatch("updateUser");
+    // this.$store.dispatch("addUser");
   },
   methods: {
-
-  }
-}
+    handleEditUser() {
+      this.$store.dispatch("updateUser");
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
 .size-form {
   min-width: 300px;
+}
+.custom-text-avatar {
+  color: #525f7f;
+  font-size: 0.875rem;
+  font-weight: 600;
 }
 </style>
